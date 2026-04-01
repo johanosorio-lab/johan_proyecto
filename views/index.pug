@@ -1,0 +1,48 @@
+extends layout
+
+block contenido
+    .contenido-principal
+        .hero-dashboard
+            .hero-content
+                h2 ¡Bienvenido al Control de Inventario Pro!
+                p Gestiona tus productos y lotes de manera eficiente con nuestra interfaz de alto rendimiento.
+                a(href="/nuevo-proyecto" class="boton") Comenzar Registro
+                .acciones-rapidas(style="margin-top: 1rem; display: flex; gap: 1rem;")
+                    button.boton.secundario(style="padding: 0.8rem 1.5rem; font-size: 0.8rem;")
+                        i.fas.fa-file-pdf
+                        |  Exportar PDF
+                    button.boton.secundario(style="padding: 0.8rem 1.5rem; font-size: 0.8rem;")
+                        i.fas.fa-print
+                        |  Imprimir Etiquetas
+            img.hero-illustration(src="/img/hero.png" alt="Dashboard Illustration")
+
+        .stats-grid
+            .stat-card
+                i.fas.fa-boxes
+                h3 Lotes Totales
+                p= proyectos.length
+            .stat-card
+                i.fas.fa-tag
+                h3 Productos
+                p -
+            .stat-card
+                i.fas.fa-check-circle
+                h3 Eficiencia
+                p 100%
+
+        .seccion-dashboard
+            h2 Actividad Reciente del Sistema
+            .listado-pendientes
+                ul
+                    li.tarea
+                        p 📦 Se ha creado un nuevo lote de 'Electrónicos'
+                        .acciones
+                            span.badge-status.status-available Reciente
+                    li.tarea
+                        p 🔄 Actualización de stock en 'Mobiliario'
+                        .acciones
+                            span.badge-status.status-pending En proceso
+                    li.tarea
+                        p ✅ Inventario de 'Papelería' completado
+                        .acciones
+                            span.badge-status.status-available Finalizado

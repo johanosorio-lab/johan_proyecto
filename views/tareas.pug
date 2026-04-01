@@ -1,0 +1,77 @@
+extends layout
+
+block contenido
+    .contenido-principal
+        .hero-dashboard
+            .hero-content
+                h1 #{nombrePagina} - #{proyecto.nombre}
+                p Gestiona los productos de este lote de manera organizada.
+                .item-meta
+                    span 
+                        i.fas.fa-fingerprint
+                        | 
+                        b ID: 
+                        | ##{proyecto.id}
+                    span 
+                        i.fas.fa-user-tie
+                        | 
+                        b Resp: 
+                        | Admin
+                    span 
+                        i.fas.fa-map-marker-alt
+                        | 
+                        b Loc: 
+                        | Almacén A-12
+            .stats-grid(style="margin:0;")
+                .stat-card(style="padding: 1.5rem; min-width: 120px;")
+                    h3 Items
+                    p= tareas.length
+
+        form.agregar-tarea(action=`/proyectos/${proyecto.url}` method="POST")
+            .campo
+               label(for="tarea") Producto:
+               input.nombre-tarea(type="text" name="tarea" placeholder="Ej: Monitor LED 24''")
+            .campo.enviar
+                input.boton.nueva-tarea(type="submit" value="Registrar") 
+
+        //- pre= vardump(tareas)
+
+        .listado-pendientes
+            ul
+              if tareas.length
+                each tarea in tareas
+                    li.tarea(data-tarea=tarea.id)
+                        .info-producto
+                            p= tarea.tarea
+                            .item-meta
+                                span 
+                                    i.fas.fa-clock
+                                    | 
+                                    b Actividad: 
+                                    | Hace 5m
+                        .acciones
+                            span.badge-status.status-available Disponible
+                            if tarea.estado
+                                i.far.fa-check-circle.completo
+                            else 
+                                i.far.fa-check-circle
+                            i.fas.fa-trash  
+              else 
+                p No hay productos en este inventario  
+
+
+
+        //- pre= vardump(tareas)
+
+        // Avance del Inventario
+        .avance 
+            h2 Avance del Inventario
+            #barra-avance.barra-avance
+                #porcentaje.porcentaje
+
+
+        // Acciones que se pueden realizar
+        .contenedor-acciones
+            a(href=`/proyecto/editar/${proyecto.id}` class="boton") Editar Inventario
+            button#eliminar-proyecto(data-proyecto-url=proyecto.url type="button" class="boton eliminar") Eliminar Inventario
+
